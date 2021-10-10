@@ -7,10 +7,9 @@
 
 import { Account } from 'aws-sdk/clients/organizations';
 import { BitbucketIntegration } from '@backstage/integration';
-import { CatalogApi } from '@backstage/catalog-client';
 import { CatalogEntitiesRequest } from '@backstage/catalog-client';
 import { Config } from '@backstage/config';
-import { DocumentCollator } from '@backstage/search-common';
+import { DocumentCollatorFactory } from '@backstage/search-common';
 import { Entity } from '@backstage/catalog-model';
 import { EntityName } from '@backstage/catalog-model';
 import { EntityPolicy } from '@backstage/catalog-model';
@@ -26,6 +25,7 @@ import { Logger as Logger_2 } from 'winston';
 import { Organizations } from 'aws-sdk';
 import { PluginDatabaseManager } from '@backstage/backend-common';
 import { PluginEndpointDiscovery } from '@backstage/backend-common';
+import { Readable } from 'stream';
 import { ResourceEntityV1alpha1 } from '@backstage/catalog-model';
 import { Router } from 'express';
 import { ScmIntegrationRegistry } from '@backstage/integration';
@@ -726,44 +726,19 @@ export type DbPageInfo =
       endCursor: string;
     };
 
-// Warning: (ae-missing-release-tag) "DefaultCatalogCollator" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "DefaultCatalogCollatorFactory" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export class DefaultCatalogCollator implements DocumentCollator {
-  constructor({
-    discovery,
-    locationTemplate,
-    filter,
-    catalogClient,
-  }: {
-    discovery: PluginEndpointDiscovery;
-    locationTemplate?: string;
-    filter?: CatalogEntitiesRequest['filter'];
-    catalogClient?: CatalogApi;
-  });
-  // (undocumented)
-  protected applyArgsToFormat(
-    format: string,
-    args: Record<string, string>,
-  ): string;
-  // (undocumented)
-  protected readonly catalogClient: CatalogApi;
-  // (undocumented)
-  protected discovery: PluginEndpointDiscovery;
-  // (undocumented)
-  execute(): Promise<CatalogEntityDocument[]>;
-  // (undocumented)
-  protected filter?: CatalogEntitiesRequest['filter'];
+export class DefaultCatalogCollatorFactory implements DocumentCollatorFactory {
+  // Warning: (ae-forgotten-export) The symbol "FactoryOptions" needs to be exported by the entry point index.d.ts
+  //
   // (undocumented)
   static fromConfig(
-    _config: Config,
-    options: {
-      discovery: PluginEndpointDiscovery;
-      filter?: CatalogEntitiesRequest['filter'];
-    },
-  ): DefaultCatalogCollator;
+    config: Config,
+    options: FactoryOptions,
+  ): DefaultCatalogCollatorFactory;
   // (undocumented)
-  protected locationTemplate: string;
+  getCollator(): Promise<Readable>;
   // (undocumented)
   readonly type: string;
 }
