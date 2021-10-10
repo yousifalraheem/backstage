@@ -5,7 +5,8 @@ import {
   LunrSearchEngine,
 } from '@backstage/plugin-search-backend-node';
 import { PluginEnvironment } from '../types';
-import { DefaultCatalogCollator } from '@backstage/plugin-catalog-backend';
+import { DefaultCatalogCollatorFactory } from '@backstage/plugin-catalog-backend';
+import { DefaultTechDocsCollatorFactory } from '@backstage/plugin-techdocs-backend';
 
 export default async function createPlugin({
   logger,
@@ -20,7 +21,16 @@ export default async function createPlugin({
   // particular collator gathers entities from the software catalog.
   indexBuilder.addCollator({
     defaultRefreshIntervalSeconds: 600,
-    collator: DefaultCatalogCollator.fromConfig(config, { discovery }),
+    factory: DefaultCatalogCollatorFactory.fromConfig(config, { discovery }),
+  });
+
+  // This collator gathers TechDocs pages.
+  indexBuilder.addCollator({
+    defaultRefreshIntervalSeconds: 600,
+    factory: DefaultTechDocsCollatorFactory.fromConfig(config, {
+      discovery,
+      logger,
+    }),
   });
 
   // The scheduler controls when documents are gathered from collators and sent
