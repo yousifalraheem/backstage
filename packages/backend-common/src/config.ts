@@ -25,7 +25,7 @@ import {
 } from '@backstage/config-loader';
 import { AppConfig, Config, ConfigReader, JsonValue } from '@backstage/config';
 
-import { setRedactionList } from './logging';
+import { setRootLoggerRedactionList } from './logging/rootLogger';
 
 // Fetch the schema and get all the secrets to pass to the rootLogger for redaction
 const updateRedactionMap = (
@@ -47,7 +47,7 @@ const updateRedactionMap = (
     `${values.length} secrets found in the config which will be redacted`,
   );
 
-  setRedactionList(values);
+  setRootLoggerRedactionList(values);
 };
 
 export class ObservableConfigProxy implements Config {
