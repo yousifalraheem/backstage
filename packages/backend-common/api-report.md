@@ -379,6 +379,11 @@ export function loadBackendConfig(options: {
 }): Promise<Config>;
 
 // @public
+export interface LockOptions {
+  timeout: Duration;
+}
+
+// @public
 export function notFoundHandler(): RequestHandler;
 
 // @public
@@ -399,30 +404,22 @@ export type PluginEndpointDiscovery = {
 
 // @public
 export interface PluginTaskManager {
-  // (undocumented)
   acquireLock(
     id: string,
-    options: {
-      timeout: Duration;
-    },
+    options: LockOptions,
   ): Promise<
     | {
         acquired: false;
       }
     | {
         acquired: true;
-        release: () => void | Promise<void>;
+        release(): Promise<void>;
       }
   >;
-  // (undocumented)
   scheduleTask(
     id: string,
-    options: {
-      timeout: Duration;
-      frequency: Duration;
-      initialDelay?: Duration;
-    },
-    fn: () => Promise<void>,
+    options: TaskOptions,
+    fn: () => void | Promise<void>,
   ): Promise<{
     unschedule: () => Promise<void>;
   }>;
@@ -610,7 +607,6 @@ export interface StatusCheckHandlerOptions {
 // @public
 export class TaskManager {
   constructor(databaseManager: DatabaseManager, logger: Logger_2);
-  // (undocumented)
   forPlugin(pluginId: string): PluginTaskManager;
   // (undocumented)
   static fromConfig(
@@ -620,6 +616,13 @@ export class TaskManager {
       logger?: Logger_2;
     },
   ): TaskManager;
+}
+
+// @public
+export interface TaskOptions {
+  frequency?: Duration;
+  initialDelay?: Duration;
+  timeout?: Duration;
 }
 
 // @public
