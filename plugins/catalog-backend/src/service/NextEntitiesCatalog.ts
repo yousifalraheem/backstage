@@ -21,7 +21,9 @@ import {
   EntitiesCatalog,
   EntitiesRequest,
   EntitiesResponse,
+  EntitiesSearchFilter,
   EntityAncestryResponse,
+  EntityFilter,
   EntityPagination,
 } from '../catalog/types';
 import {
@@ -67,6 +69,57 @@ function parsePagination(input?: EntityPagination): {
   return { limit, offset };
 }
 
+function isEntityFilter(
+  input: EntityFilter | EntitiesSearchFilter,
+): input is EntityFilter {
+  return input.hasOwnProperty('anyOf');
+}
+
+function parseFiltersToDbQuery(filters: EntityFilter, db: Knex) {
+  return function parseFilters(queryBuilder: Knex.QueryBuilder) {
+    // let queryBuilderTemp = queryBuilder;
+    for (const singleFilter of filters.anyOf ?? []) {
+      queryBuilder.orWhere(function singleFilterFn() {
+        for (const child of singleFilter.allOf) {
+          if (isEntityFilter(child)) {
+            this.andWhere(parseFiltersToDbQuery(child, db));
+          } else {
+            const { key, matchValueIn, matchValueExists } = child;
+            // NOTE(freben): This used to be a set of OUTER JOIN, which may seem to
+            // make a lot of sense. However, it had abysmal performance on sqlite
+            // when datasets grew large, so we're using IN instead.
+            const matchQuery = db<DbSearchRow>('search')
+              .select('entity_id')
+              .where(function keyFilter() {
+                this.andWhere({ key: key.toLowerCase() });
+                if (matchValueExists !== false && matchValueIn) {
+                  // TODO: there's a bug here, need to open issue - when matchValueIn
+                  // has length 0, the filter should result in no values being returned,
+                  // instead the filter ends up being a no-op.
+                  if (matchValueIn.length === 1) {
+                    this.andWhere({ value: matchValueIn[0].toLowerCase() });
+                  } else if (matchValueIn.length > 1) {
+                    this.andWhere(
+                      'value',
+                      'in',
+                      matchValueIn.map(v => v.toLowerCase()),
+                    );
+                  }
+                }
+              });
+            // Explicitly evaluate matchValueExists as a boolean since it may be undefined
+            this.andWhere(
+              'entity_id',
+              matchValueExists === false ? 'not in' : 'in',
+              matchQuery,
+            );
+          }
+        }
+      });
+    }
+  };
+}
+
 function stringifyPagination(input: { limit: number; offset: number }) {
   const json = JSON.stringify({ limit: input.limit, offset: input.offset });
   const base64 = Buffer.from(json, 'utf8').toString('base64');
@@ -81,40 +134,10 @@ export class NextEntitiesCatalog implements EntitiesCatalog {
 
     let entitiesQuery = db<DbFinalEntitiesRow>('final_entities');
 
-    for (const singleFilter of request?.filter?.anyOf ?? []) {
-      entitiesQuery = entitiesQuery.orWhere(function singleFilterFn() {
-        for (const {
-          key,
-          matchValueIn,
-          matchValueExists,
-        } of singleFilter.allOf) {
-          // NOTE(freben): This used to be a set of OUTER JOIN, which may seem to
-          // make a lot of sense. However, it had abysmal performance on sqlite
-          // when datasets grew large, so we're using IN instead.
-          const matchQuery = db<DbSearchRow>('search')
-            .select('entity_id')
-            .where(function keyFilter() {
-              this.andWhere({ key: key.toLowerCase() });
-              if (matchValueExists !== false && matchValueIn) {
-                if (matchValueIn.length === 1) {
-                  this.andWhere({ value: matchValueIn[0].toLowerCase() });
-                } else if (matchValueIn.length > 1) {
-                  this.andWhere(
-                    'value',
-                    'in',
-                    matchValueIn.map(v => v.toLowerCase()),
-                  );
-                }
-              }
-            });
-          // Explicitly evaluate matchValueExists as a boolean since it may be undefined
-          this.andWhere(
-            'entity_id',
-            matchValueExists === false ? 'not in' : 'in',
-            matchQuery,
-          );
-        }
-      });
+    if (request?.filter) {
+      entitiesQuery = entitiesQuery.andWhere(
+        parseFiltersToDbQuery(request.filter, db),
+      );
     }
 
     // TODO: move final_entities to use entity_ref

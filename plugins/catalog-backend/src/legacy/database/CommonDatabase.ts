@@ -46,13 +46,23 @@ import {
   DbPageInfo,
   Transaction,
 } from './types';
-import { EntityPagination } from '../../catalog/types';
+import {
+  EntitiesSearchFilter,
+  EntityFilter,
+  EntityPagination,
+} from '../../catalog/types';
 
 // The number of items that are sent per batch to the database layer, when
 // doing .batchInsert calls to knex. This needs to be low enough to not cause
 // errors in the underlying engine due to exceeding query limits, but large
 // enough to get the speed benefits.
 const BATCH_SIZE = 50;
+
+function isEntityFilter(
+  input: EntityFilter | EntitiesSearchFilter,
+): input is EntityFilter {
+  return input.hasOwnProperty('anyOf');
+}
 
 /**
  * The core database implementation..
@@ -219,11 +229,14 @@ export class CommonDatabase implements Database {
 
     for (const singleFilter of request?.filter?.anyOf ?? []) {
       entitiesQuery = entitiesQuery.orWhere(function singleFilterFn() {
-        for (const {
-          key,
-          matchValueIn,
-          matchValueExists,
-        } of singleFilter.allOf) {
+        for (const child of singleFilter.allOf) {
+          if (isEntityFilter(child)) {
+            throw new Error(
+              'Nested filters are not supported in the legacy CommonDatabase',
+            );
+          }
+
+          const { key, matchValueIn, matchValueExists } = child;
           // NOTE(freben): This used to be a set of OUTER JOIN, which may seem to
           // make a lot of sense. However, it had abysmal performance on sqlite
           // when datasets grew large, so we're using IN instead.
