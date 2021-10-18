@@ -22,11 +22,14 @@
   "dependencies": {
     "@backstage/backend-common": "^0.9.6",
     "@backstage/config": "^0.1.10",
+    "@backstage/errors": "^0.1.2",
+    "@backstage/permission-common": "^0.1.0",
+    "@backstage/plugin-auth-backend": "^0.4.3",
     "@types/express": "*",
+    "cross-fetch": "^3.0.6",
     "express": "^4.17.1",
     "express-promise-router": "^4.1.0",
     "winston": "^3.2.1",
-    "cross-fetch": "^3.0.6",
     "yn": "^4.0.0"
   },
   "devDependencies": {

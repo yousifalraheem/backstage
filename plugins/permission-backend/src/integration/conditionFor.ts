@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Backstage Authors
+ * Copyright 2021 The Backstage Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,6 +14,11 @@
  * limitations under the License.
  */
 
-export * from './service';
-export * from './handler';
-export { conditionFor, createPermissionIntegration } from './integration';
+import { PermissionRule } from '@backstage/permission-common';
+
+export const conditionFor =
+  <TParams extends any[]>(rule: PermissionRule<any, any, TParams>) =>
+  (...params: TParams) => ({
+    rule: rule.name,
+    params,
+  });
