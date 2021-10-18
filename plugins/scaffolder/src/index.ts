@@ -44,3 +44,4 @@ export {
   TextValuePicker,
 } from './components/fields';
 export { FavouriteTemplate } from './components/FavouriteTemplate';
+export { ScaffolderPermission } from './permissions';
