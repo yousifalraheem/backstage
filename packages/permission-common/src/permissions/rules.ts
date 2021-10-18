@@ -13,6 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export * from './types';
-export * from './permissions';
-export * from './PermissionClient';
+
+import { PermissionCriteria } from '../types';
+
+export type PermissionCondition<TParams extends any[] = any> = {
+  rule: string;
+  params: TParams;
+};
+
+export type PermissionRule<TResource, TQuery, TParams extends any[] = any> = {
+  name: string;
+  description: string;
+  apply(resource: TResource, ...params: TParams): boolean;
+  toQuery(...params: TParams): TQuery | PermissionCriteria<TQuery>;
+};
