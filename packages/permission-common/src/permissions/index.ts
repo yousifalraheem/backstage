@@ -19,4 +19,5 @@ export type { PermissionAttributes } from './attributes';
 export * from './permission';
 export { CRUDAction } from './attributes';
 export { createPermissions } from './util';
+export * from './techdocs';
 export * from './rules';
