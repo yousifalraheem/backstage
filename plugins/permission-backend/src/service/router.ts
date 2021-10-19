@@ -38,12 +38,10 @@ import {
   Identified,
   PermissionCondition,
   PermissionCriteria,
+  DefinitiveAuthorizeResult,
 } from '@backstage/permission-common';
 import { PermissionHandler } from '../handler';
-import {
-  ApplyConditionsRequest,
-  ApplyConditionsResponse,
-} from '../integration';
+import { ApplyConditionsRequest } from '../integration';
 
 export interface RouterOptions {
   logger: Logger;
@@ -61,7 +59,7 @@ const applyConditions = async (
   },
   discoveryApi: PluginEndpointDiscovery,
   authHeader?: string,
-): Promise<boolean> => {
+): Promise<DefinitiveAuthorizeResult> => {
   const endpoint = `${await discoveryApi.getBaseUrl(
     conditions.pluginId,
   )}/permissions/apply-conditions`;
@@ -86,9 +84,7 @@ const applyConditions = async (
   }
 
   // TODO(authorization-framework) validate response
-  const { allowed } = (await response.json()) as ApplyConditionsResponse;
-
-  return allowed;
+  return (await response.json()) as DefinitiveAuthorizeResult;
 };
 
 const handleRequest = async (
@@ -116,14 +112,12 @@ const handleRequest = async (
     if (resourceRef) {
       return {
         id,
-        result: (await applyConditions(
+        ...(await applyConditions(
           resourceRef,
           response.conditions,
           discoveryApi,
           authHeader,
-        ))
-          ? AuthorizeResult.ALLOW
-          : AuthorizeResult.DENY,
+        )),
       };
     }
 

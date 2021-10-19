@@ -17,7 +17,4 @@
 export { conditionFor } from './conditionFor';
 export { createPermissionIntegration } from './createPermissionIntegration';
 
-export type {
-  ApplyConditionsRequest,
-  ApplyConditionsResponse,
-} from './createPermissionIntegration';
+export type { ApplyConditionsRequest } from './createPermissionIntegration';

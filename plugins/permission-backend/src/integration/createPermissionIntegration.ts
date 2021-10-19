@@ -15,6 +15,8 @@
  */
 
 import {
+  AuthorizeResult,
+  DefinitiveAuthorizeResult,
   PermissionCondition,
   PermissionCriteria,
   PermissionRule,
@@ -26,10 +28,6 @@ export type ApplyConditionsRequest = {
   resourceRef: string;
   resourceType: string;
   conditions: PermissionCriteria<PermissionCondition<unknown[]>>;
-};
-
-export type ApplyConditionsResponse = {
-  allowed: boolean;
 };
 
 type Condition<TRule> = TRule extends PermissionRule<any, any, infer TParams>
@@ -111,7 +109,7 @@ export const createPermissionIntegration = <
 
       router.post(
         '/permissions/apply-conditions',
-        async (req, res: Response<ApplyConditionsResponse>) => {
+        async (req, res: Response<DefinitiveAuthorizeResult>) => {
           // TODO(authorization-framework): validate input
           const body = req.body as ApplyConditionsRequest;
 
@@ -140,9 +138,11 @@ export const createPermissionIntegration = <
             );
           };
 
-          const allowed = resolveCriteria(body.conditions);
-
-          return res.status(200).json({ allowed });
+          return res.status(200).json({
+            result: resolveCriteria(body.conditions)
+              ? AuthorizeResult.ALLOW
+              : AuthorizeResult.DENY,
+          });
         },
       );
 
