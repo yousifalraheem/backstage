@@ -1,5 +1,13 @@
 # @backstage/plugin-techdocs
 
+## 0.12.3
+
+### Patch Changes
+
+- cdf8ca6111: Only replace the shadow dom if the content is changed to avoid a flickering UI.
+- Updated dependencies
+  - @backstage/core-components@0.7.1
+
 ## 0.12.2
 
 ### Patch Changes

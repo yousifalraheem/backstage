@@ -1,5 +1,16 @@
 # example-app
 
+## 0.2.51
+
+### Patch Changes
+
+- Updated dependencies
+  - @backstage/core-components@0.7.1
+  - @backstage/plugin-catalog-graph@0.2.1
+  - @backstage/plugin-jenkins@0.5.11
+  - @backstage/plugin-techdocs@0.12.3
+  - @backstage/cli@0.8.0
+
 ## 0.2.50
 
 ### Patch Changes

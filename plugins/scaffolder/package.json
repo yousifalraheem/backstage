@@ -34,7 +34,7 @@
     "@backstage/catalog-client": "^0.5.0",
     "@backstage/catalog-model": "^0.9.4",
     "@backstage/config": "^0.1.10",
-    "@backstage/core-components": "^0.7.0",
+    "@backstage/core-components": "^0.7.1",
     "@backstage/core-plugin-api": "^0.1.10",
     "@backstage/errors": "^0.1.2",
     "@backstage/integration": "^0.6.8",
@@ -64,7 +64,7 @@
     "zen-observable": "^0.8.15"
   },
   "devDependencies": {
-    "@backstage/cli": "^0.7.16",
+    "@backstage/cli": "^0.8.0",
     "@backstage/core-app-api": "^0.1.17",
     "@backstage/dev-utils": "^0.2.12",
     "@backstage/test-utils": "^0.1.19",

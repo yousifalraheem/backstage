@@ -1,5 +1,13 @@
 # @backstage/plugin-fossa
 
+## 0.2.21
+
+### Patch Changes
+
+- 09c106b96c: Add `entitiesFilter` option to `FossaPage` to filter entities displayed in the table.
+- Updated dependencies
+  - @backstage/core-components@0.7.1
+
 ## 0.2.20
 
 ### Patch Changes

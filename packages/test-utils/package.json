@@ -46,7 +46,7 @@
     "zen-observable": "^0.8.15"
   },
   "devDependencies": {
-    "@backstage/cli": "^0.7.16",
+    "@backstage/cli": "^0.8.0",
     "@types/jest": "^26.0.7",
     "@types/node": "^14.14.32"
   },

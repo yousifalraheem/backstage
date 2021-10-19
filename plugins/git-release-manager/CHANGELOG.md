@@ -1,5 +1,13 @@
 # @backstage/plugin-git-release-manager
 
+## 0.3.2
+
+### Patch Changes
+
+- 82ea1f2bed: Minor internal type improvement
+- Updated dependencies
+  - @backstage/core-components@0.7.1
+
 ## 0.3.1
 
 ### Patch Changes

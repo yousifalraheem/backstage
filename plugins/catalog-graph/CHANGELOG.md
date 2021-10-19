@@ -1,5 +1,13 @@
 # @backstage/plugin-catalog-graph
 
+## 0.2.1
+
+### Patch Changes
+
+- ce0aef1841: Capture analytics events for clicks in the graph.
+- Updated dependencies
+  - @backstage/core-components@0.7.1
+
 ## 0.2.0
 
 ### Minor Changes
