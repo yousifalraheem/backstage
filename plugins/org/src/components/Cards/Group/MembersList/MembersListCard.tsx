@@ -99,7 +99,16 @@ const MemberComponent = ({ member }: { member: UserEntity }) => {
                 {displayName}
               </Link>
             </Typography>
-            <Typography variant="caption">{profile?.email}</Typography>
+            {profile?.email && (
+              <Link
+                component={RouterLink}
+                to={`mailto:${profile.email}`}
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                {profile.email}
+              </Link>
+            )}
           </Box>
         </Box>
       </Box>
