@@ -86,8 +86,8 @@
 <tr><td><a href="/docs/reference/integration">@backstage/integration</a></td><td>Helpers for managing integrations towards external systems</td></tr>
 <tr><td><a href="/docs/reference/integration-react">@backstage/integration-react</a></td><td>Frontend package for managing integrations towards external systems</td></tr>
 <tr><td><a href="/docs/reference/release-manifests">@backstage/release-manifests</a></td><td>Contains mapping between Backstage release and package versions.</td></tr>
-<tr><td><a href="/docs/reference/search-common">@backstage/search-common</a></td><td>Common functionalities for Search, to be shared between various search-enabled plugins</td></tr>
-<tr><td><a href="/docs/reference/techdocs-common">@backstage/techdocs-common</a></td><td>Common functionalities for TechDocs, to be shared between techdocs-backend plugin and techdocs-cli</td></tr>
+<tr><td><a href="/docs/reference/search-common">@backstage/search-common</a></td><td></td></tr>
+<tr><td><a href="/docs/reference/techdocs-common">@backstage/techdocs-common</a></td><td></td></tr>
 <tr><td><a href="/docs/reference/test-utils">@backstage/test-utils</a></td><td>Utilities to test Backstage plugins and apps.</td></tr>
 <tr><td><a href="/docs/reference/theme">@backstage/theme</a></td><td><a href="https://mui.com">material-ui</a> theme for use with Backstage</td></tr>
 <tr><td><a href="/docs/reference/types">@backstage/types</a></td><td>Common TypeScript types used within Backstage</td></tr>
@@ -100,7 +100,7 @@
 <tr><th>Package</th><th>Description</th></tr>
 </thead>
 <tbody>
-<tr><td><a href="/docs/reference/plugin-airbrake">@backstage/plugin-airbrake</a></td><td></td></tr>
+<tr><td><a href="/docs/reference/plugin-airbrake">@backstage/plugin-airbrake</a></td><td>The Airbrake plugin provides connectivity between Backstage and Airbrake (<a href="https://airbrake.io/">https://airbrake.io/</a>).</td></tr>
 <tr><td><a href="/docs/reference/plugin-airbrake-backend">@backstage/plugin-airbrake-backend</a></td><td>The Airbrake Backend plugin used by @<!-- -->backstage/plugin-airbrake</td></tr>
 <tr><td><a href="/docs/reference/plugin-allure">@backstage/plugin-allure</a></td><td>A Backstage plugin that integrates with Allure</td></tr>
 <tr><td><a href="/docs/reference/plugin-analytics-module-ga">@backstage/plugin-analytics-module-ga</a></td><td></td></tr>
@@ -119,8 +119,11 @@
 <tr><td><a href="/docs/reference/plugin-bitrise">@backstage/plugin-bitrise</a></td><td>A Backstage plugin that integrates towards Bitrise</td></tr>
 <tr><td><a href="/docs/reference/plugin-catalog">@backstage/plugin-catalog</a></td><td>The Backstage plugin for browsing the Backstage catalog</td></tr>
 <tr><td><a href="/docs/reference/plugin-catalog-backend">@backstage/plugin-catalog-backend</a></td><td>The Backstage backend plugin that provides the Backstage catalog</td></tr>
-<tr><td><a href="/docs/reference/plugin-catalog-backend-module-ldap">@backstage/plugin-catalog-backend-module-ldap</a></td><td>A Backstage catalog backend modules that helps integrate towards LDAP</td></tr>
-<tr><td><a href="/docs/reference/plugin-catalog-backend-module-msgraph">@backstage/plugin-catalog-backend-module-msgraph</a></td><td>A Backstage catalog backend modules that helps integrate towards Microsoft Graph</td></tr>
+<tr><td><a href="/docs/reference/plugin-catalog-backend-module-aws">@backstage/plugin-catalog-backend-module-aws</a></td><td>A Backstage catalog backend module that helps integrate towards AWS</td></tr>
+<tr><td><a href="/docs/reference/plugin-catalog-backend-module-azure">@backstage/plugin-catalog-backend-module-azure</a></td><td>A Backstage catalog backend module that helps integrate towards Azure</td></tr>
+<tr><td><a href="/docs/reference/plugin-catalog-backend-module-gitlab">@backstage/plugin-catalog-backend-module-gitlab</a></td><td>A Backstage catalog backend module that helps integrate towards GitLab</td></tr>
+<tr><td><a href="/docs/reference/plugin-catalog-backend-module-ldap">@backstage/plugin-catalog-backend-module-ldap</a></td><td>A Backstage catalog backend module that helps integrate towards LDAP</td></tr>
+<tr><td><a href="/docs/reference/plugin-catalog-backend-module-msgraph">@backstage/plugin-catalog-backend-module-msgraph</a></td><td>A Backstage catalog backend module that helps integrate towards Microsoft Graph</td></tr>
 <tr><td><a href="/docs/reference/plugin-catalog-common">@backstage/plugin-catalog-common</a></td><td>Provides shared objects useful for interacting with the catalog and its entities, such as catalog permissions.</td></tr>
 <tr><td><a href="/docs/reference/plugin-catalog-graph">@backstage/plugin-catalog-graph</a></td><td>The catalog graph visualizes the relations between entities, like ownership, grouping or API relationships.</td></tr>
 <tr><td><a href="/docs/reference/plugin-catalog-graphql">@backstage/plugin-catalog-graphql</a></td><td>An experimental Backstage catalog GraphQL module</td></tr>
@@ -129,6 +132,7 @@
 <tr><td><a href="/docs/reference/plugin-cicd-statistics">@backstage/plugin-cicd-statistics</a></td><td></td></tr>
 <tr><td><a href="/docs/reference/plugin-circleci">@backstage/plugin-circleci</a></td><td>A Backstage plugin that integrates towards Circle CI</td></tr>
 <tr><td><a href="/docs/reference/plugin-cloudbuild">@backstage/plugin-cloudbuild</a></td><td>A Backstage plugin that integrates towards Google Cloud Build</td></tr>
+<tr><td><a href="/docs/reference/plugin-code-climate">@backstage/plugin-code-climate</a></td><td>A Backstage plugin that integrates towards Code Climate</td></tr>
 <tr><td><a href="/docs/reference/plugin-code-coverage">@backstage/plugin-code-coverage</a></td><td>A Backstage plugin that helps you keep track of your code coverage</td></tr>
 <tr><td><a href="/docs/reference/plugin-code-coverage-backend">@backstage/plugin-code-coverage-backend</a></td><td>A Backstage backend plugin that helps you keep track of your code coverage</td></tr>
 <tr><td><a href="/docs/reference/plugin-config-schema">@backstage/plugin-config-schema</a></td><td>A Backstage plugin that lets you browse the configuration schema of your app</td></tr>
@@ -149,6 +153,7 @@
 <tr><td><a href="/docs/reference/plugin-ilert">@backstage/plugin-ilert</a></td><td></td></tr>
 <tr><td><a href="/docs/reference/plugin-jenkins">@backstage/plugin-jenkins</a></td><td>A Backstage plugin that integrates towards Jenkins</td></tr>
 <tr><td><a href="/docs/reference/plugin-jenkins-backend">@backstage/plugin-jenkins-backend</a></td><td>A Backstage backend plugin that integrates towards Jenkins</td></tr>
+<tr><td><a href="/docs/reference/plugin-jenkins-common">@backstage/plugin-jenkins-common</a></td><td></td></tr>
 <tr><td><a href="/docs/reference/plugin-kafka">@backstage/plugin-kafka</a></td><td>A Backstage plugin that integrates towards Kafka</td></tr>
 <tr><td><a href="/docs/reference/plugin-kafka-backend">@backstage/plugin-kafka-backend</a></td><td>A Backstage backend plugin that integrates towards Kafka</td></tr>
 <tr><td><a href="/docs/reference/plugin-kubernetes">@backstage/plugin-kubernetes</a></td><td>A Backstage plugin that integrates towards Kubernetes</td></tr>
@@ -177,6 +182,7 @@
 <tr><td><a href="/docs/reference/plugin-search-backend-module-elasticsearch">@backstage/plugin-search-backend-module-elasticsearch</a></td><td>A module for the search backend that implements search using ElasticSearch</td></tr>
 <tr><td><a href="/docs/reference/plugin-search-backend-module-pg">@backstage/plugin-search-backend-module-pg</a></td><td>A module for the search backend that implements search using PostgreSQL</td></tr>
 <tr><td><a href="/docs/reference/plugin-search-backend-node">@backstage/plugin-search-backend-node</a></td><td>A library for Backstage backend plugins that want to interact with the search backend plugin</td></tr>
+<tr><td><a href="/docs/reference/plugin-search-common">@backstage/plugin-search-common</a></td><td>Common functionalities for Search, to be shared between various search-enabled plugins</td></tr>
 <tr><td><a href="/docs/reference/plugin-sentry">@backstage/plugin-sentry</a></td><td>A Backstage plugin that integrates towards Sentry</td></tr>
 <tr><td><a href="/docs/reference/plugin-shortcuts">@backstage/plugin-shortcuts</a></td><td>A Backstage plugin that provides a shortcuts feature to the sidebar</td></tr>
 <tr><td><a href="/docs/reference/plugin-sonarqube">@backstage/plugin-sonarqube</a></td><td>A Backstage plugin to display <a href="https://www.sonarqube.org">SonarQube</a> code quality and security results.</td></tr>
@@ -189,6 +195,7 @@
 <tr><td><a href="/docs/reference/plugin-tech-radar">@backstage/plugin-tech-radar</a></td><td>A Backstage plugin that lets you display a Tech Radar for your organization</td></tr>
 <tr><td><a href="/docs/reference/plugin-techdocs">@backstage/plugin-techdocs</a></td><td>The Backstage plugin that renders technical documentation for your components</td></tr>
 <tr><td><a href="/docs/reference/plugin-techdocs-backend">@backstage/plugin-techdocs-backend</a></td><td>The Backstage backend plugin that renders technical documentation for your components</td></tr>
+<tr><td><a href="/docs/reference/plugin-techdocs-node">@backstage/plugin-techdocs-node</a></td><td>Common functionalities for TechDocs, to be shared between techdocs-backend plugin and techdocs-cli</td></tr>
 <tr><td><a href="/docs/reference/plugin-todo">@backstage/plugin-todo</a></td><td>A Backstage plugin that lets you browse TODO comments in your source code</td></tr>
 <tr><td><a href="/docs/reference/plugin-todo-backend">@backstage/plugin-todo-backend</a></td><td>A Backstage backend plugin that lets you browse TODO comments in your source code</td></tr>
 <tr><td><a href="/docs/reference/plugin-user-settings">@backstage/plugin-user-settings</a></td><td>A Backstage plugin that provides a settings page</td></tr>
