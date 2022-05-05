@@ -13,7 +13,7 @@
 </blockquote>
 <p><b>Signature:</b></p>
 <pre><code class="hljs css language-typescript">createOauth2ProxyProvider: (options: {
-    authHandler: AuthHandler&lt;OAuth2ProxyResult&lt;unknown&gt;&gt;;
+    authHandler?: AuthHandler&lt;OAuth2ProxyResult&lt;unknown&gt;&gt; | <span class="hljs-literal">undefined</span>;
     signIn: {
         resolver: SignInResolver&lt;OAuth2ProxyResult&lt;unknown&gt;&gt;;
     };

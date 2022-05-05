@@ -13,6 +13,7 @@
     reader: UrlReader;
     integrations: ScmIntegrations;
     containerRunner: ContainerRunner;
+    allowedImageNames?: <span class="hljs-built_in">string</span>[];
 }</span>): <span class="hljs-title">import</span>(<span class="hljs-params">"<span class="hljs-meta">@backstage</span>/plugin-scaffolder-backend"</span>).<span class="hljs-title">TemplateAction</span>&lt;</span>{
     url: <span class="hljs-built_in">string</span>;
     targetPath?: <span class="hljs-built_in">string</span> | <span class="hljs-literal">undefined</span>;
@@ -26,7 +27,7 @@
 <tr><th>Parameter</th><th>Type</th><th>Description</th></tr>
 </thead>
 <tbody>
-<tr><td>options</td><td>{ reader: <a href="/docs/reference/backend-common.urlreader">UrlReader</a><!-- -->; integrations: <a href="/docs/reference/integration.scmintegrations">ScmIntegrations</a><!-- -->; containerRunner: <a href="/docs/reference/backend-common.containerrunner">ContainerRunner</a><!-- -->; }</td><td>Configuration of the templater.</td></tr>
+<tr><td>options</td><td>{ reader: <a href="/docs/reference/backend-common.urlreader">UrlReader</a><!-- -->; integrations: <a href="/docs/reference/integration.scmintegrations">ScmIntegrations</a><!-- -->; containerRunner: <a href="/docs/reference/backend-common.containerrunner">ContainerRunner</a><!-- -->; allowedImageNames?: string[]; }</td><td>Configuration of the templater.</td></tr>
 </tbody>
 </table>
 <p><b>Returns:</b></p>

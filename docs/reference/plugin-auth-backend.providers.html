@@ -116,7 +116,7 @@
     }&gt;;
     oauth2Proxy: Readonly&lt;{
         create: (options: {
-            authHandler: <span class="hljs-keyword">import</span>(<span class="hljs-string">"./types"</span>).AuthHandler&lt;<span class="hljs-keyword">import</span>(<span class="hljs-string">"./oauth2-proxy/provider"</span>).OAuth2ProxyResult&lt;unknown&gt;&gt;;
+            authHandler?: <span class="hljs-keyword">import</span>(<span class="hljs-string">"./types"</span>).AuthHandler&lt;<span class="hljs-keyword">import</span>(<span class="hljs-string">"./oauth2-proxy/provider"</span>).OAuth2ProxyResult&lt;unknown&gt;&gt; | <span class="hljs-literal">undefined</span>;
             signIn: {
                 resolver: <span class="hljs-keyword">import</span>(<span class="hljs-string">"./types"</span>).SignInResolver&lt;<span class="hljs-keyword">import</span>(<span class="hljs-string">"./oauth2-proxy/provider"</span>).OAuth2ProxyResult&lt;unknown&gt;&gt;;
             };
